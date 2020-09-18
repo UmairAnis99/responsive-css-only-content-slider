@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap');
+
+@mixin small {
+  @media all and (max-width: 740px) {
+    @content;
+  }
+}
+@mixin small-LS {
+  @media all and (min-width: 480px)and (max-width: 740px) and (orientation: landscape) {
+    @content;
+  }
+}
+@mixin medium {
+  @media all and (min-width: 741px) and (max-width: 999px) {
+    @content;
+  }
+}
+@mixin large {
+  @media all and (min-width: 1000px) {
+    @content;
+  }
+}
+:root {
+  --color1: floralwhite;
+  --color2: rgb(12, 12, 12);
+  --color3: rgb(0, 255, 170);
+  //rgb(0, 255, 170);
+  //rgb(255, 0, 76);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: 'Quicksand', sans-serif;
+}
+body {
+  width: 100%;
+  background-color: var(--color2);
+  overflow-x: hidden;
+  .container {
+    width: 100%;
+    height: 100vh;
+    min-width: 360px;
+    min-height: 480px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    @include small-LS {
+      min-height: 320px;
+    }
+    .slider {
+      @include small {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        border-radius: 0;
+      }
+      @include medium {
+        width: 95%;
+        height: 85%;
+      }
+      @include large {
+        width: 85%;
+        height: 75%;
+      }
+      position: relative;
+      margin: auto;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: var(--color2);
+      opacity: 0;
+      animation: fadeIn 2000ms ease-in-out 1500ms forwards;
+      .selectors {
+        display: none;
+      }
+      .slides {
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        padding-bottom: 5%;
+        display: flex;
+        border-radius: 10px;
+        opacity: 0;
+        transition: all 1000ms ease-in;
+        @include small {
+          border-radius: 0;
+        }
+        .content {
+          background-color: rgba($color: rgb(12, 12, 12), $alpha: 0.7);
+          width: 85%;
+          margin: auto;
+          padding: 1.25rem 0.75rem;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          border-radius: 15px;
+          color: var(--color1);
+          transform: translateY(-500%);
+          opacity: 0;
+          transition: all 600ms ease-out 1000ms;
+          @include large {
+            padding: 1.5rem 1rem;
+          }
+          h1 {
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            text-shadow: 4px 4px 3px var(--color2);
+          }
+          h2 {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            border-bottom: 3px var(--color3) solid;
+            border-radius: 0 0 5px 5px;
+          }
+          p {
+            font-weight: 500;
+            line-height: 1.5rem;
+            margin-bottom: 1.25rem;
+          }
+          .btns {
+            align-self: center;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 15px;
+            background-color: var(--color3);
+            color: var(--color2);
+            font-weight: 700;
+            transition: all 500ms;
+            cursor: pointer;
+          }
+          .btns:hover {
+            background-color: rgb(0, 0, 0);
+            color: var(--color1);
+          }
+          .btns:active {
+            margin-bottom: -7px;
+            margin-top: 7px;
+          }
+        }
+        .prev,
+        .next {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 32px;
+          height: 32px;
+          box-shadow: -3px 3px var(--color1);
+          transition: all 150ms ease-in-out;
+          cursor: pointer;
+          z-index: 10;
+          @include small {
+            width: 24px;
+            height: 24px;
+          }
+          @include medium {
+            width: 28px;
+            height: 28px;
+          }
+        }
+        .prev {
+          left: 3%;
+          transform: rotate(45deg);
+        }
+        .next {
+          right: 3%;
+          transform: rotate(-135deg);
+        }
+        .prev:active,
+        .next:active {
+          box-shadow: -3px 3px var(--color3);
+        }
+      }
+      .slide1 {
+        background: center no-repeat
+          url("../img/travel/dudipatsar-lake-pakistan.jpg");
+        background-size: cover;
+      }
+      .slide2 {
+        background: bottom no-repeat
+          url("../img/travel/deosai-national-park.jpg");
+        background-size: cover;
+      }
+      .slide3 {
+        background: center no-repeat url("../img/travel/malam-jabba-pakistan.jpg");
+        background-size: cover;
+      }
+      .slide4 {
+        background: center no-repeat
+          url("../img/travel/faisal-mosque-pakistan.jpg");
+        background-size: cover;
+      }
+      .slide5 {
+        background: bottom no-repeat
+          url("../img/travel/hunza-valley-pakistan.jpg");
+        background-size: cover;
+      }
+      .nav {
+        position: absolute;
+        bottom: 5%;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        z-index: 10;
+        @include small {
+          bottom: 9%;
+        }
+        @include small-LS {
+          bottom: 3%;
+        }
+        .dots {
+          display: block;
+          width: 25px;
+          height: 12px;
+          background-color: var(--color3);
+          border-radius: 10px;
+          margin: 0 5px;
+          transition: all 150ms ease-in-out;
+          cursor: pointer;
+        }
+      }
+      .selectors:checked + .slides {
+        z-index: 5;
+        opacity: 1;
+      }
+      .selectors:checked + .slides .content {
+        transform: translateY(0%);
+        opacity: 1;
+      }
+      #sl1:checked ~ .nav .dot1,
+      #sl2:checked ~ .nav .dot2,
+      #sl3:checked ~ .nav .dot3,
+      #sl4:checked ~ .nav .dot4,
+      #sl5:checked ~ .nav .dot5 {
+        box-shadow: 0px 0px 10px 3px var(--color3);
+      }
+    }
+  }
+}
+@keyframes fadeIn {
+  50% {opacity: 1;}
+  100% {
+    opacity: 1;
+    background-color: rgb(192, 192, 192);
+  }
+}
